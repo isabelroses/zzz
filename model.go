@@ -89,8 +89,6 @@ type Model struct {
 
 // Init initialzes the application model.
 func (m *Model) Init() tea.Cmd {
-	rand.Seed(time.Now().Unix())
-
 	m.Folders.Styles.Title = m.FoldersStyle.Title
 	m.Folders.Styles.TitleBar = m.FoldersStyle.TitleBar
 	m.updateKeyMap()
