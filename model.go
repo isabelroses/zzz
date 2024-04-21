@@ -498,9 +498,7 @@ func (m *Model) displayKeyHint(hints []keyHint) {
 // displayError updates the content viewport with the error message provided.
 func (m *Model) displayError(error string) {
 	m.LineNumbers.SetContent(" ~ ")
-	m.Code.SetContent(fmt.Sprintf("%s",
-		m.ContentStyle.EmptyHint.Render(error),
-	))
+	m.Code.SetContent(m.ContentStyle.EmptyHint.Render(error))
 }
 
 // writeLineNumbers writes the number of line numbers to the line number
