@@ -32,13 +32,13 @@ var defaultSnippet = Snippet{
 // Snippet represents a snippet of code in a language.
 // It is nested within a folder and can be tagged with metadata.
 type Snippet struct {
-	Tags     []string  `json:"tags"`
-	Folder   string    `json:"folder"`
 	Date     time.Time `json:"date"`
-	Favorite bool      `json:"favorite"`
+	Folder   string    `json:"folder"`
 	Name     string    `json:"title"`
 	File     string    `json:"file"`
 	Language string    `json:"language"`
+	Tags     []string  `json:"tags"`
+	Favorite bool      `json:"favorite"`
 }
 
 // String returns the folder/name.ext of the snippet.
