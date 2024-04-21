@@ -25,8 +25,7 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-var (
-	helpText = strings.TrimSpace(`
+var helpText = strings.TrimSpace(`
 Nap is a code snippet manager for your terminal.
 https://github.com/maaslalani/nap
 
@@ -38,7 +37,6 @@ Usage:
 Create:
   nap < main.go                 - save snippet from stdin
   nap example/main.go < main.go - save snippet with name`)
-)
 
 func main() {
 	runCLI(os.Args[1:])
