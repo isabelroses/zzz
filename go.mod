@@ -1,4 +1,4 @@
-module github.com/maaslalani/nap
+module github.com/isabelroses/zzz
 
 go 1.19
 
