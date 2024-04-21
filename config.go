@@ -17,24 +17,24 @@ import (
 // At the moment, it is quite limited, only supporting the home folder and the
 // file name of the metadata.
 type Config struct {
-	Home string `env:"NAP_HOME" yaml:"home"`
-	File string `env:"NAP_FILE" yaml:"file"`
+	Home string `env:"ZZZ_HOME" yaml:"home"`
+	File string `env:"ZZZ_FILE" yaml:"file"`
 
-	DefaultLanguage string `env:"NAP_DEFAULT_LANGUAGE" yaml:"default_language"`
+	DefaultLanguage string `env:"ZZZ_DEFAULT_LANGUAGE" yaml:"default_language"`
 
-	Theme string `env:"NAP_THEME" yaml:"theme"`
+	Theme string `env:"ZZZ_THEME" yaml:"theme"`
 
-	PrimaryColor        string `env:"NAP_PRIMARY_COLOR" yaml:"primary_color"`
-	PrimaryColorSubdued string `env:"NAP_PRIMARY_COLOR_SUBDUED" yaml:"primary_color_subdued"`
-	BrightGreenColor    string `env:"NAP_BRIGHT_GREEN" yaml:"bright_green"`
-	GreenColor          string `env:"NAP_GREEN" yaml:"green"`
-	BrightRedColor      string `env:"NAP_BRIGHT_RED" yaml:"bright_red"`
-	RedColor            string `env:"NAP_RED" yaml:"red"`
-	ForegroundColor     string `env:"NAP_FOREGROUND" yaml:"foreground"`
-	BackgroundColor     string `env:"NAP_BACKGROUND" yaml:"background"`
-	GrayColor           string `env:"NAP_GRAY" yaml:"gray"`
-	BlackColor          string `env:"NAP_BLACK" yaml:"black"`
-	WhiteColor          string `env:"NAP_WHITE" yaml:"white"`
+	PrimaryColor        string `env:"ZZZ_PRIMARY_COLOR" yaml:"primary_color"`
+	PrimaryColorSubdued string `env:"ZZZ_PRIMARY_COLOR_SUBDUED" yaml:"primary_color_subdued"`
+	BrightGreenColor    string `env:"ZZZ_BRIGHT_GREEN" yaml:"bright_green"`
+	GreenColor          string `env:"ZZZ_GREEN" yaml:"green"`
+	BrightRedColor      string `env:"ZZZ_BRIGHT_RED" yaml:"bright_red"`
+	RedColor            string `env:"ZZZ_RED" yaml:"red"`
+	ForegroundColor     string `env:"ZZZ_FOREGROUND" yaml:"foreground"`
+	BackgroundColor     string `env:"ZZZ_BACKGROUND" yaml:"background"`
+	GrayColor           string `env:"ZZZ_GRAY" yaml:"gray"`
+	BlackColor          string `env:"ZZZ_BLACK" yaml:"black"`
+	WhiteColor          string `env:"ZZZ_WHITE" yaml:"white"`
 }
 
 func newConfig() Config {
@@ -59,14 +59,14 @@ func newConfig() Config {
 
 // default helpers for the configuration.
 // We use $XDG_DATA_HOME to avoid cluttering the user's home directory.
-func defaultHome() string { return filepath.Join(xdg.DataHome, "nap") }
+func defaultHome() string { return filepath.Join(xdg.DataHome, "zzz") }
 
 // defaultConfig returns the default config path
 func defaultConfig() string {
-	if c := os.Getenv("NAP_CONFIG"); c != "" {
+	if c := os.Getenv("ZZZ_CONFIG"); c != "" {
 		return c
 	}
-	cfgPath, err := xdg.ConfigFile("nap/config.yaml")
+	cfgPath, err := xdg.ConfigFile("zzz/config.yaml")
 	if err != nil {
 		return "config.yaml"
 	}

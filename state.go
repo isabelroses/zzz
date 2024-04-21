@@ -27,10 +27,10 @@ func (s State) Save() error {
 
 // defaultState returns the default state path
 func defaultState() string {
-	if c := os.Getenv("NAP_STATE"); c != "" {
+	if c := os.Getenv("ZZZ_STATE"); c != "" {
 		return c
 	}
-	statePath, err := xdg.StateFile("nap/state.json")
+	statePath, err := xdg.StateFile("zzz/state.json")
 	if err != nil {
 		return "state.json"
 	}

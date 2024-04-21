@@ -134,8 +134,8 @@ func tmpHome(t *testing.T) string {
 	t.Helper()
 
 	tmp := t.TempDir()
-	if err := os.Setenv("NAP_HOME", tmp); err != nil {
-		t.Log("could not set NAP_HOME")
+	if err := os.Setenv("ZZZ_HOME", tmp); err != nil {
+		t.Log("could not set ZZZ_HOME")
 		t.FailNow()
 	}
 	return tmp

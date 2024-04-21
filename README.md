@@ -2,8 +2,7 @@
 
 zzz is a highly opinionated fork of nap
 
-
-
+To move to zzz just rename all your previously defined `NAP_` env vars to `ZZZ_`
 
 
 

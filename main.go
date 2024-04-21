@@ -26,17 +26,17 @@ import (
 )
 
 var helpText = strings.TrimSpace(`
-Nap is a code snippet manager for your terminal.
-https://github.com/maaslalani/nap
+zzz is a code snippet manager for your terminal.
+https://github.com/isabelroses/zzz
 
 Usage:
-  nap           - for interactive mode
-  nap list      - list all snippets
-  nap <snippet> - print snippet to stdout
+  zzz           - for interactive mode
+  zzz list      - list all snippets
+  zzz <snippet> - print snippet to stdout
 
 Create:
-  nap < main.go                 - save snippet from stdin
-  nap example/main.go < main.go - save snippet with name`)
+  zzz < main.go                 - save snippet from stdin
+  zzz example/main.go < main.go - save snippet with name`)
 
 func main() {
 	runCLI(os.Args[1:])
@@ -328,7 +328,7 @@ func findSnippet(search string, snippets []Snippet) Snippet {
 
 func runInteractiveMode(config Config, snippets []Snippet) error {
 	if len(snippets) == 0 {
-		// welcome to nap!
+		// welcome to zzz!
 		snippets = append(snippets, defaultSnippet)
 	}
 	state := readState()
