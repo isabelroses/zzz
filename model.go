@@ -392,11 +392,11 @@ func (m *Model) editSnippet() tea.Cmd {
 
 func (m *Model) noContentHints() []keyHint {
 	return []keyHint{
-		{m.keys.EditSnippet, "edit contents"},
-		{m.keys.PasteSnippet, "paste clipboard"},
-		{m.keys.RenameSnippet, "rename"},
-		{m.keys.SetFolder, "set folder"},
-		{m.keys.SetLanguage, "set language"},
+		{"edit contents", m.keys.EditSnippet},
+		{"paste clipboard", m.keys.PasteSnippet},
+		{"rename", m.keys.RenameSnippet},
+		{"set folder", m.keys.SetFolder},
+		{"set language", m.keys.SetLanguage},
 	}
 }
 
@@ -445,7 +445,7 @@ func (m *Model) updateFoldersView() tea.Msg {
 func (m *Model) updateContentView(msg updateContentMsg) (tea.Model, tea.Cmd) {
 	if len(m.List().Items()) <= 0 {
 		m.displayKeyHint([]keyHint{
-			{m.keys.NewSnippet, "create a new snippet."},
+			{"create a new snippet.", m.keys.NewSnippet},
 		})
 		return m, nil
 	}
@@ -476,8 +476,8 @@ func (m *Model) updateContentView(msg updateContentMsg) (tea.Model, tea.Cmd) {
 }
 
 type keyHint struct {
-	binding key.Binding
 	help    string
+	binding key.Binding
 }
 
 // displayKeyHint updates the content viewport with instructions on the
