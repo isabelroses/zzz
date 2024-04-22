@@ -30,10 +30,10 @@ type Config struct {
 	GreenColor          string `env:"ZZZ_GREEN" yaml:"green"`
 	BrightRedColor      string `env:"ZZZ_BRIGHT_RED" yaml:"bright_red"`
 	RedColor            string `env:"ZZZ_RED" yaml:"red"`
-	ForegroundColor     string `env:"ZZZ_FOREGROUND" yaml:"foreground"`
-	BackgroundColor     string `env:"ZZZ_BACKGROUND" yaml:"background"`
 	GrayColor           string `env:"ZZZ_GRAY" yaml:"gray"`
-	TextInvertColor     string `env:"ZZZ_BLACK" yaml:"textinvert"`
+	TextColor           string `env:"ZZZ_TEXT" yaml:"foreground"`
+	TextInvertColor     string `env:"ZZZ_TEXTINVERT" yaml:"textinvert"`
+	SubTextColor        string `env:"ZZZ_SUBTEXT" yaml:"subtext"`
 }
 
 func newConfig() Config {
@@ -48,9 +48,9 @@ func newConfig() Config {
 		GreenColor:          "#a6e3a1",
 		BrightRedColor:      "#eba0ac",
 		RedColor:            "#f38ba8",
-		ForegroundColor:     "#cdd6f4",
-		BackgroundColor:     "#1e1e2e",
 		GrayColor:           "#313244",
+		TextColor:           "#cdd6f4",
+		SubTextColor:        "#6c7086",
 		TextInvertColor:     "#11111b",
 	}
 }

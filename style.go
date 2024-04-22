@@ -74,9 +74,10 @@ var marginStyle = lipgloss.NewStyle().Margin(1, 0, 0, 1)
 // DefaultStyles is the default implementation of the styles struct for all
 // styling in the application.
 func DefaultStyles(config Config) Styles {
-	text := lipgloss.Color(config.ForegroundColor)
-	gray := lipgloss.Color(config.GrayColor)
+	text := lipgloss.Color(config.TextColor)
+	subtext := lipgloss.Color(config.SubTextColor)
 	textInvert := lipgloss.Color(config.TextInvertColor)
+	gray := lipgloss.Color(config.GrayColor)
 	green := lipgloss.Color(config.GreenColor)
 	brightGreen := lipgloss.Color(config.BrightGreenColor)
 	primary := lipgloss.Color(config.PrimaryColor)
@@ -84,14 +85,13 @@ func DefaultStyles(config Config) Styles {
 	red := lipgloss.Color(config.RedColor)
 	brightRed := lipgloss.Color(config.BrightRedColor)
 
-	// TODO: make non-focused colors more subtle
 	return Styles{
 		Snippets: SnippetsStyle{
 			Focused: SnippetsBaseStyle{
 				Base:               lipgloss.NewStyle().Width(35),
 				TitleBar:           lipgloss.NewStyle().Background(primary).Width(35-2).Margin(0, 1, 1, 1).Padding(0, 1).Foreground(textInvert),
 				SelectedSubtitle:   lipgloss.NewStyle().Foreground(subprimary),
-				UnselectedSubtitle: lipgloss.NewStyle().Foreground(text),
+				UnselectedSubtitle: lipgloss.NewStyle().Foreground(subtext),
 				SelectedTitle:      lipgloss.NewStyle().Foreground(primary),
 				UnselectedTitle:    lipgloss.NewStyle().Foreground(text),
 				CopiedTitleBar:     lipgloss.NewStyle().Background(green).Width(35-2).Margin(0, 1, 1, 1).Padding(0, 1).Foreground(textInvert),
@@ -105,9 +105,9 @@ func DefaultStyles(config Config) Styles {
 				Base:               lipgloss.NewStyle().Width(35),
 				TitleBar:           lipgloss.NewStyle().Background(gray).Width(35-2).Margin(0, 1, 1, 1).Padding(0, 1).Foreground(primary),
 				SelectedSubtitle:   lipgloss.NewStyle().Foreground(primary),
-				UnselectedSubtitle: lipgloss.NewStyle().Foreground(text),
+				UnselectedSubtitle: lipgloss.NewStyle().Foreground(subtext),
 				SelectedTitle:      lipgloss.NewStyle().Foreground(primary),
-				UnselectedTitle:    lipgloss.NewStyle().Foreground(text),
+				UnselectedTitle:    lipgloss.NewStyle().Foreground(subtext),
 				CopiedTitleBar:     lipgloss.NewStyle().Background(green).Width(35-2).Margin(0, 1, 1, 1).Padding(0, 1),
 				CopiedTitle:        lipgloss.NewStyle().Foreground(brightGreen),
 				CopiedSubtitle:     lipgloss.NewStyle().Foreground(green),
@@ -129,7 +129,7 @@ func DefaultStyles(config Config) Styles {
 				Title:      lipgloss.NewStyle().Padding(0, 1).Foreground(primary),
 				TitleBar:   lipgloss.NewStyle().Background(gray).Width(22-2).Margin(0, 1, 1, 1),
 				Selected:   lipgloss.NewStyle().Foreground(primary),
-				Unselected: lipgloss.NewStyle().Foreground(text),
+				Unselected: lipgloss.NewStyle().Foreground(subtext),
 			},
 		},
 		Content: ContentStyle{
@@ -145,7 +145,7 @@ func DefaultStyles(config Config) Styles {
 				Base:         lipgloss.NewStyle().Margin(0, 1),
 				Title:        lipgloss.NewStyle().Background(gray).Foreground(primary).Margin(0, 0, 1, 1).Padding(0, 1),
 				Separator:    lipgloss.NewStyle().Foreground(text).Margin(0, 0, 1, 1),
-				LineNumber:   lipgloss.NewStyle().Foreground(text),
+				LineNumber:   lipgloss.NewStyle().Foreground(subtext),
 				EmptyHint:    lipgloss.NewStyle().Foreground(gray),
 				EmptyHintKey: lipgloss.NewStyle().Foreground(primary),
 			},
