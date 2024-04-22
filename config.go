@@ -33,8 +33,7 @@ type Config struct {
 	ForegroundColor     string `env:"ZZZ_FOREGROUND" yaml:"foreground"`
 	BackgroundColor     string `env:"ZZZ_BACKGROUND" yaml:"background"`
 	GrayColor           string `env:"ZZZ_GRAY" yaml:"gray"`
-	BlackColor          string `env:"ZZZ_BLACK" yaml:"black"`
-	WhiteColor          string `env:"ZZZ_WHITE" yaml:"white"`
+	TextInvertColor     string `env:"ZZZ_BLACK" yaml:"textinvert"`
 }
 
 func newConfig() Config {
@@ -42,18 +41,17 @@ func newConfig() Config {
 		Home:                defaultHome(),
 		File:                "snippets.json",
 		DefaultLanguage:     defaultLanguage,
-		Theme:               "dracula",
-		PrimaryColor:        "#AFBEE1",
-		PrimaryColorSubdued: "#64708D",
-		BrightGreenColor:    "#BCE1AF",
-		GreenColor:          "#527251",
-		BrightRedColor:      "#E49393",
-		RedColor:            "#A46060",
-		ForegroundColor:     "15",
-		BackgroundColor:     "235",
-		GrayColor:           "241",
-		BlackColor:          "#373b41",
-		WhiteColor:          "#FFFFFF",
+		Theme:               "catppuccin-mocha",
+		PrimaryColor:        "#74c7ec",
+		PrimaryColorSubdued: "#94e2d5",
+		BrightGreenColor:    "#f9e2af",
+		GreenColor:          "#a6e3a1",
+		BrightRedColor:      "#eba0ac",
+		RedColor:            "#f38ba8",
+		ForegroundColor:     "#cdd6f4",
+		BackgroundColor:     "#1e1e2e",
+		GrayColor:           "#313244",
+		TextInvertColor:     "#11111b",
 	}
 }
 
