@@ -1,2 +1,3 @@
-tapes/*.gif
-/nap*
+zzz
+.DS_Store
+result
