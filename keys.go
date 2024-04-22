@@ -41,8 +41,8 @@ var DefaultKeyMap = KeyMap{
 	TagSnippet:      key.NewBinding(key.WithKeys("t"), key.WithHelp("t", "tag"), key.WithDisabled()),
 	Confirm:         key.NewBinding(key.WithKeys("y"), key.WithHelp("y", "confirm")),
 	Cancel:          key.NewBinding(key.WithKeys("esc"), key.WithHelp("esc", "cancel")),
-	NextPane:        key.NewBinding(key.WithKeys("tab", "right", "l"), key.WithHelp("tab", "navigate")),
-	PreviousPane:    key.NewBinding(key.WithKeys("shift+tab", "h"), key.WithHelp("shift+tab", "navigate")),
+	NextPane:        key.NewBinding(key.WithKeys("tab", "right", "l"), key.WithHelp("→/l", "navigate")),
+	PreviousPane:    key.NewBinding(key.WithKeys("shift+tab", "left", "h"), key.WithHelp("←/h", "navigate")),
 	ChangeFolder:    key.NewBinding(key.WithKeys("enter"), key.WithHelp("enter", "change folder"), key.WithDisabled()),
 }
 
