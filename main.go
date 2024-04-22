@@ -396,8 +396,7 @@ func runInteractiveMode(config Config, snippets []Snippet) error {
 		config:       config,
 		inputs: []textinput.Model{
 			newTextInput(defaultSnippetFolder + " "),
-			newTextInput(defaultSnippetName + " "),
-			newTextInput(config.DefaultLanguage),
+			newTextInput(defaultSnippetName),
 		},
 		tagsInput: newTextInput("Tags"),
 	}

@@ -50,7 +50,6 @@ type input int
 const (
 	folderInput input = iota
 	nameInput
-	languageInput
 )
 
 // Model represents the state of the application.
@@ -174,28 +173,28 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				i := m.List().Index()
 				snippet := m.selectedSnippet()
 				if m.inputs[nameInput].Value() != "" {
-					snippet.Name = m.inputs[nameInput].Value()
-				} else {
-					snippet.Name = defaultSnippetName
+					fullname := strings.Split(m.inputs[nameInput].Value(), ".")
+					if len(fullname) == 2 {
+						snippet.Name = fullname[0]
+						snippet.Language = fullname[1]
+					} else {
+						snippet.Name = defaultSnippetName
+						snippet.Language = m.config.DefaultLanguage
+					}
+					if m.inputs[folderInput].Value() != "" {
+						snippet.Folder = m.inputs[folderInput].Value()
+					} else {
+						snippet.Folder = defaultSnippetFolder
+					}
+					file := fmt.Sprintf("%s.%s", snippet.Name, snippet.Language)
+					snippet.File = file
+					newPath := filepath.Join(m.config.Home, snippet.Path())
+					_ = os.MkdirAll(filepath.Dir(newPath), os.ModePerm)
+					_ = os.Rename(m.selectedSnippetFilePath(), newPath)
+					setCmd := m.List().SetItem(i, snippet)
+					m.pane = snippetPane
+					cmd = tea.Batch(setCmd, m.updateFolders(), m.updateContent())
 				}
-				if m.inputs[folderInput].Value() != "" {
-					snippet.Folder = m.inputs[folderInput].Value()
-				} else {
-					snippet.Folder = defaultSnippetFolder
-				}
-				if m.inputs[languageInput].Value() != "" {
-					snippet.Language = m.inputs[languageInput].Value()
-				} else {
-					snippet.Language = m.config.DefaultLanguage
-				}
-				file := fmt.Sprintf("%s.%s", snippet.Name, snippet.Language)
-				snippet.File = file
-				newPath := filepath.Join(m.config.Home, snippet.Path())
-				_ = os.MkdirAll(filepath.Dir(newPath), os.ModePerm)
-				_ = os.Rename(m.selectedSnippetFilePath(), newPath)
-				setCmd := m.List().SetItem(i, snippet)
-				m.pane = snippetPane
-				cmd = tea.Batch(setCmd, m.updateFolders(), m.updateContent())
 			}
 		case pastingState:
 			content, err := clipboard.ReadAll()
@@ -218,9 +217,8 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if snippet.Name == defaultSnippetName {
 				m.inputs[nameInput].SetValue("")
 			} else {
-				m.inputs[nameInput].SetValue(snippet.Name)
+				m.inputs[nameInput].SetValue(snippet.Name + "." + snippet.Language)
 			}
-			m.inputs[languageInput].SetValue(snippet.Language)
 			cmd = m.focusInput(m.activeInput)
 		case creatingState:
 		case copyingState:
@@ -251,7 +249,8 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			break
 		}
 
-		if m.state == deletingState {
+		switch m.state {
+		case deletingState:
 			switch {
 			case key.Matches(msg, m.keys.Confirm):
 				_ = os.Remove(m.selectedSnippetFilePath())
@@ -265,9 +264,9 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				return m, changeState(navigatingState)
 			}
 			return m, nil
-		} else if m.state == copyingState {
+		case copyingState:
 			return m, changeState(navigatingState)
-		} else if m.state == editingState {
+		case editingState:
 			if msg.String() == "esc" || msg.String() == "enter" {
 				return m, changeState(navigatingState)
 			}
@@ -320,9 +319,6 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.LineNumbers.Height = newHeight
 		case key.Matches(msg, m.keys.SetFolder):
 			m.activeInput = folderInput
-			return m, changeState(editingState)
-		case key.Matches(msg, m.keys.SetLanguage):
-			m.activeInput = languageInput
 			return m, changeState(editingState)
 		case key.Matches(msg, m.keys.CopySnippet):
 			return m, func() tea.Msg {
@@ -396,7 +392,6 @@ func (m *Model) noContentHints() []keyHint {
 		{"paste clipboard", m.keys.PasteSnippet},
 		{"rename", m.keys.RenameSnippet},
 		{"set folder", m.keys.SetFolder},
-		{"set language", m.keys.SetLanguage},
 	}
 }
 
@@ -610,13 +605,15 @@ func (m *Model) createNewSnippetFile() tea.Cmd {
 			folder = folderItem.FilterValue()
 		}
 
-		file := fmt.Sprintf("snippet-%d.%s", rand.Intn(1000000), m.config.DefaultLanguage)
+		lang := m.config.DefaultLanguage
+
+		file := fmt.Sprintf("snippet-%d.%s", rand.Intn(1000000), lang)
 
 		newSnippet := Snippet{
 			Name:     defaultSnippetName,
 			Date:     time.Now(),
 			File:     file,
-			Language: m.config.DefaultLanguage,
+			Language: lang,
 			Tags:     []string{},
 			Folder:   folder,
 		}
@@ -636,15 +633,13 @@ func (m *Model) View() string {
 
 	var (
 		folder   = m.ContentStyle.Title.Render(m.selectedSnippet().Folder)
-		name     = m.ContentStyle.Title.Render(m.selectedSnippet().Name)
-		language = m.ContentStyle.Title.Render(m.selectedSnippet().Language)
+		name     = m.ContentStyle.Title.Render(m.selectedSnippet().Name + "." + m.selectedSnippet().Language)
 		titleBar = m.ListStyle.TitleBar.Render("Snippets")
 	)
 
 	if m.state == editingState {
 		folder = m.inputs[folderInput].View()
 		name = m.inputs[nameInput].View()
-		language = m.inputs[languageInput].View()
 	} else if m.state == copyingState {
 		titleBar = m.ListStyle.CopiedTitleBar.Render("Copied Snippet!")
 	} else if m.state == deletingState {
@@ -664,8 +659,6 @@ func (m *Model) View() string {
 					folder,
 					m.ContentStyle.Separator.Render("/"),
 					name,
-					m.ContentStyle.Separator.Render("."),
-					language,
 				),
 				lipgloss.JoinHorizontal(lipgloss.Left,
 					m.ContentStyle.LineNumber.Render(m.LineNumbers.View()),

@@ -17,7 +17,6 @@ type KeyMap struct {
 	SetFolder       key.Binding
 	RenameSnippet   key.Binding
 	TagSnippet      key.Binding
-	SetLanguage     key.Binding
 	Confirm         key.Binding
 	Cancel          key.Binding
 	NextPane        key.Binding
@@ -39,7 +38,6 @@ var DefaultKeyMap = KeyMap{
 	PasteSnippet:    key.NewBinding(key.WithKeys("p"), key.WithHelp("p", "paste")),
 	RenameSnippet:   key.NewBinding(key.WithKeys("r"), key.WithHelp("r", "rename snippet")),
 	SetFolder:       key.NewBinding(key.WithKeys("R"), key.WithHelp("R", "rename folder")),
-	SetLanguage:     key.NewBinding(key.WithKeys("L"), key.WithHelp("L", "set file type")),
 	TagSnippet:      key.NewBinding(key.WithKeys("t"), key.WithHelp("t", "tag"), key.WithDisabled()),
 	Confirm:         key.NewBinding(key.WithKeys("y"), key.WithHelp("y", "confirm")),
 	Cancel:          key.NewBinding(key.WithKeys("esc"), key.WithHelp("esc", "cancel")),
@@ -66,7 +64,7 @@ func (k KeyMap) FullHelp() [][]key.Binding {
 	return [][]key.Binding{
 		{k.NewSnippet, k.EditSnippet, k.PasteSnippet, k.CopySnippet, k.DeleteSnippet},
 		{k.MoveSnippetDown, k.MoveSnippetUp},
-		{k.RenameSnippet, k.SetFolder, k.TagSnippet, k.SetLanguage},
+		{k.RenameSnippet, k.SetFolder, k.TagSnippet},
 		{k.NextPane, k.PreviousPane},
 		{k.Search, k.ToggleHelp, k.Quit},
 	}
