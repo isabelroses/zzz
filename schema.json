@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "hexadecimal_color": {
+            "type": "string",
+            "pattern": "^\\S+$",
+            "examples": [
+                "#000000",
+                "#FF0000",
+                "#00FF00",
+                "#0000FF",
+                "#FFFF00",
+                "#FF00FF",
+                "#FFFFFF"
+            ]
+        },
+        "color_number": {
+            "type": "string",
+            "pattern": "^[0-7]$"
+        }
+    },
+    "title": "zzz settings",
+    "description": "zzz settings",
+    "type": "object",
+    "properties": {
+        "home": {
+            "title": "home",
+            "description": "A home directory\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+            "type": "string",
+            "minLength": 1,
+            "default": "~/.local/share/zzz"
+        },
+        "default_language": {
+            "title": "default language",
+            "description": "A default language\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+            "type": "string",
+            "minLength": 1,
+            "default": "go"
+        },
+        "theme": {
+            "title": "theme",
+            "description": "A theme\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+            "type": "string",
+            "minLength": 1,
+            "default": "catppuccin-mocha"
+        },
+        "primary_color": {
+            "title": "primary color",
+            "description": "A primary color\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+            "$ref": "#/definitions/hexadecimal_color"
+        },
+        "primary_color_subdued": {
+            "title": "primary color subdued",
+            "description": "A primary color subdued\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+            "$ref": "#/definitions/hexadecimal_color"
+        },
+        "bright_green": {
+          "title": "bright green",
+          "description": "A bright green\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+          "$ref": "#/definitions/hexadecimal_color"
+        },
+        "green": {
+          "title": "green",
+          "description": "A green\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+          "$ref": "#/definitions/hexadecimal_color"
+        },
+        "bright_red": {
+          "title": "bright red",
+          "description": "A bright red\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+          "$ref": "#/definitions/hexadecimal_color"
+        },
+        "red": {
+          "title": "red",
+          "description": "A red\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+          "$ref": "#/definitions/hexadecimal_color"
+        },
+        "gray": {
+          "title": "gray",
+          "description": "A gray\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+          "$ref": "#/definitions/hexadecimal_color"
+        },
+        "foreground": {
+          "title": "foreground",
+          "description": "A foreground\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+          "$ref": "#/definitions/hexadecimal_color"
+        },
+        "textinvert": {
+          "title": "textinvert",
+          "description": "A textinvert\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+          "$ref": "#/definitions/hexadecimal_color"
+        },
+        "subtext": {
+          "title": "subtext",
+          "description": "A subtext\nhttps://github.com/isabelroses/zzz?tab=readme-ov-file#customization",
+          "$ref": "#/definitions/hexadecimal_color"
+        }
+    },
+    "additionalProperties": false
+}
