@@ -28,7 +28,7 @@ Launch the interactive interface:
 zzz
 ```
 
-<img width="1000" src="https://user-images.githubusercontent.com/42545625/202768989-caf2ab62-b69d-4e2d-ac93-1517eab7f2ad.gif" />
+<img width="1000" src="./tapes/zzz-demo.gif" />
 
 <details>
 
@@ -73,7 +73,7 @@ curl https://example.com/main.go | zzz Notes/FizzBuzz.go
 gh gist view 4ff8a6472247e6dd2315fd4038926522 | zzz
 ```
 
-<img width="600" src="https://user-images.githubusercontent.com/42545625/202767159-134d679f-490f-4ad2-8875-cda604aa7b13.gif" />
+<img width="600" src="./tapes/zzz-save.gif" />
 
 Output saved snippets:
 
@@ -90,7 +90,7 @@ zzz foobar | xclip
 zzz foobar | wl-copy
 ```
 
-<img width="600" src="https://user-images.githubusercontent.com/42545625/202240249-d724fd73-2f90-4036-b9fc-6d2ccef982b3.gif" />
+<img width="600" src="./tapes/fuzzy-find.gif" />
 
 List snippets:
 
@@ -98,15 +98,13 @@ List snippets:
 zzz list
 ```
 
-<img width="600" src="https://user-images.githubusercontent.com/42545625/202242653-1696dda6-2527-4c38-b673-74d67ad1517f.gif" />
+<img width="600" src="./tapes/zzz-list.gif" />
 
 Fuzzy find a snippet (with [Gum](https://github.com/charmbracelet/gum)).
 
 ```bash
 zzz $(zzz list | gum filter)
 ```
-
-<img width="600" src="https://user-images.githubusercontent.com/42545625/202240268-3a71fde6-73c3-4b0a-b129-f87ec1bb1b88.gif" />
 
 ## Installation
 
