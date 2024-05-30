@@ -10,8 +10,10 @@
     forEachSystem = nixpkgs.lib.genAttrs systems;
     pkgsForEach = nixpkgs.legacyPackages;
   in {
-    packages = forEachSystem (system: {
-      default = pkgsForEach.${system}.callPackage ./default.nix {};
+    packages = forEachSystem (system: rec {
+      zzz = pkgsForEach.${system}.callPackage ./default.nix {};
+
+      default = zzz;
     });
 
     devShells = forEachSystem (system: {
