@@ -24,25 +24,27 @@ in
 
     package = mkPackageOption self.packages.${pkgs.stdenv.hostPlatform.system} "zzz" { };
 
-    home = mkOption {
-      type = with types; str;
-      default = "~/.zzz";
-      example = "~/.snippets";
-      description = "home for your snippets";
-    };
+    settings = {
+      home = mkOption {
+        type = with types; str;
+        default = "~/.zzz";
+        example = "~/.snippets";
+        description = "home for your snippets";
+      };
 
-    default_language = mkOption {
-      type = with types; str;
-      default = "go";
-      example = "rust";
-      description = "default language for new snippets";
-    };
+      default_language = mkOption {
+        type = with types; str;
+        default = "go";
+        example = "rust";
+        description = "default language for new snippets";
+      };
 
-    theme = mkOption {
-      type = with types; str;
-      default = "catppuccin-mocha";
-      example = "nord";
-      description = "theme for code previews";
+      theme = mkOption {
+        type = with types; str;
+        default = "catppuccin-mocha";
+        example = "nord";
+        description = "theme for code previews";
+      };
     };
 
     colors = mkOption {
@@ -76,9 +78,9 @@ in
       home.packages = [ cfg.package ];
 
       xdg.configFile = {
-        "zzz/config.yaml" = {
+        "zzz/config.yaml" = mkIf ((cfg.colors != {}) || (cfg.settings != {})) {
           source = (settingsFormat.generate "zzz-config.yaml" (cfg.colors //
-                {inherit (cfg) home default_language theme;}));
+                cfg.settings));
         };
       };
     };
