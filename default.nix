@@ -1,14 +1,11 @@
-{
-  lib,
-  buildGoModule,
-}:
+{ lib, buildGoModule }:
 buildGoModule {
   pname = "zzz";
   version = "unstable";
 
   src = ./.;
 
-  vendorHash = "sha256-ePHkrsc9NJO8c3J1eDkFeSLvVs5flSeiTmXqkfF261s=";
+  vendorHash = "sha256-qgda2JLT+rtf9b+3JKhvu0uuXGKssLC0YrMghn1QQ8I=";
 
   ldflags = [
     "-s"
@@ -20,6 +17,6 @@ buildGoModule {
     mainProgram = "zzz";
     homepage = "https://github.com/isabelroses/zzz";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [isabelroses];
+    maintainers = with lib.maintainers; [ isabelroses ];
   };
 }
