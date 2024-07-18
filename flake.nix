@@ -1,25 +1,29 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  }: let
-    systems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
-    forEachSystem = nixpkgs.lib.genAttrs systems;
-    pkgsForEach = nixpkgs.legacyPackages;
-  in {
-    packages = forEachSystem (system: rec {
-      zzz = pkgsForEach.${system}.callPackage ./default.nix {};
+  outputs =
+    { self, nixpkgs, ... }:
+    let
+      systems = [
+        "x86_64-linux"
+        "x86_64-darwin"
+        "i686-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+      forAllSystems =
+        function: nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
+    in
+    {
+      packages = forAllSystems (pkgs: rec {
+        zzz = pkgs.callPackage ./default.nix { };
+        default = zzz;
+      });
 
-      default = zzz;
-    });
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.callPackage ./shell.nix { };
+      });
 
-    devShells = forEachSystem (system: {
-      default = pkgsForEach.${system}.callPackage ./shell.nix {};
-    });
-
-    homeManagerModules.default = import ./hm-module.nix self;
-  };
+      homeManagerModules.default = import ./hm-module.nix self;
+    };
 }
