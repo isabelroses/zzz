@@ -29,7 +29,7 @@ var DefaultKeyMap = KeyMap{
 	Quit:            key.NewBinding(key.WithKeys("q", "ctrl+c"), key.WithHelp("q", "exit")),
 	Search:          key.NewBinding(key.WithKeys("/"), key.WithHelp("/", "search")),
 	ToggleHelp:      key.NewBinding(key.WithKeys("?"), key.WithHelp("?", "help")),
-	NewSnippet:      key.NewBinding(key.WithKeys("a"), key.WithHelp("n", "new")),
+	NewSnippet:      key.NewBinding(key.WithKeys("n"), key.WithHelp("n", "new")),
 	MoveSnippetDown: key.NewBinding(key.WithKeys("J"), key.WithHelp("J", "move snippet down")),
 	MoveSnippetUp:   key.NewBinding(key.WithKeys("K"), key.WithHelp("K", "move snippet up")),
 	DeleteSnippet:   key.NewBinding(key.WithKeys("x"), key.WithHelp("x", "delete")),
