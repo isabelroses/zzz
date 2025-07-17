@@ -15,9 +15,9 @@
         function: nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
     in
     {
-      packages = forAllSystems (pkgs: rec {
+      packages = forAllSystems (pkgs: {
         zzz = pkgs.callPackage ./default.nix { };
-        default = zzz;
+        default = self.packages.${pkgs.system}.zzz;
       });
 
       devShells = forAllSystems (pkgs: {
